@@ -11,6 +11,15 @@ class Home extends StatefulWidget{
 }
 
 class HomeState extends State<Home> {
+
+  int radioValue = 0;
+
+  void handleRadioValueChanged(int value){
+    setState(() {
+      radioValue = value;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -33,7 +42,7 @@ class HomeState extends State<Home> {
               width: 200,),
 
             new Container(
-              margin: const EdgeInsets.all(3),
+              margin: const EdgeInsets.all(2),
               alignment: Alignment.center,
               child: new Column(
                 children: <Widget>[
@@ -45,6 +54,47 @@ class HomeState extends State<Home> {
                         labelText: "Your weight on earth",
                         hintText: "in pounds",
                         icon: new Icon(Icons.person_outline)
+                    ),
+                  ),
+                  new Padding(padding: new EdgeInsets.all(5)),
+
+                  new Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      new Radio<int>(
+                          activeColor: Colors.brown,
+                          value: 0, groupValue: radioValue, onChanged: handleRadioValueChanged),
+
+                      new Text("Pluto",
+                      style: new TextStyle(color: Colors.white30),),
+
+                      new Radio<int>(
+                        activeColor: Colors.redAccent,
+                          value: 1, groupValue: radioValue, onChanged: handleRadioValueChanged),
+
+                      new Text("Mart",
+                        style: new TextStyle(color: Colors.white30),),
+
+                      new Radio<int>(
+                        activeColor: Colors.orangeAccent,
+                          value: 2, groupValue: radioValue, onChanged: handleRadioValueChanged),
+
+                      new Text("Venus",
+                        style: new TextStyle(color: Colors.white30),),
+
+                          
+                    ],
+                  ),
+
+                  new Padding(padding: new EdgeInsets.all(15)),
+                  
+                  new Text(
+                    "Hello there",
+                    style: new TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
+
                     ),
                   )
                 ],
