@@ -13,11 +13,36 @@ class Home extends StatefulWidget{
 class HomeState extends State<Home> {
 
   int radioValue = 0;
-
+  final TextEditingController _weightController = new TextEditingController();
+  double _finalResult = 0;
+  
   void handleRadioValueChanged(int value){
     setState(() {
       radioValue = value;
+
+      switch(radioValue){
+        case 0:
+          _finalResult = calculateWeight(_weightController.text, 0.06);
+          break;
+        case 1:
+          _finalResult = calculateWeight(_weightController.text, 0.38);
+          break;
+        case 2:
+          _finalResult = calculateWeight(_weightController.text, 0.91);
+
+      }
+
+
     });
+  }
+
+  double calculateWeight(String weight, double mult){
+    if(int.parse(weight).toString().isNotEmpty && int.parse(weight) > 0){
+    return double.parse(weight) * mult;
+    }else{
+      print("wrong");
+      return 0;
+    }
   }
 
   @override
@@ -48,7 +73,7 @@ class HomeState extends State<Home> {
                 children: <Widget>[
 
                   new TextField(
-                    controller: null,
+                    controller: _weightController,
                     keyboardType: TextInputType.number,
                     decoration: new InputDecoration(
                         labelText: "Your weight on earth",
@@ -89,7 +114,7 @@ class HomeState extends State<Home> {
                   new Padding(padding: new EdgeInsets.all(15)),
                   
                   new Text(
-                    "Hello there",
+                    "$_finalResult",
                     style: new TextStyle(
                       color: Colors.white,
                       fontSize: 20,
